@@ -1,0 +1,47 @@
+<div class="main tb-height--full junkie">
+    <mat-toolbar [@transitionFromTop]="{value:'in', params: {animDelay: 200}}" 
+    appWidgetWaterfall [waterfallReferenceTarget]="contentScroller"
+        waterfallReferenceLink="dashboard-content" waterfallActiveClass="active"
+        class="junkie-top-nav tb-position--absolute tb-width--full tb-z-index--3 tb-padding--v-4">
+        <mat-toolbar-row>
+            <a class="tb-a--unset" matRipple routerLink="/">
+                <div ngClass.gt-xs="logo_area tb-padding--8-24" ngClass.xs="logo_area tb-padding--0" fxLayout="row"
+                    fxLayoutAlign="start center" fxLayoutGap="12px">
+                    <img class="image logo" src="assets/img/hw_logo.png">
+                </div>
+            </a>
+        </mat-toolbar-row>
+
+        <mat-toolbar-row fxFlex fxLayout="row" fxLayoutAlign="center center">
+            <a matRipple href="#about-section"
+                class="tb-a--unset tb-flex--justify-center tb-typo--h5 tb-font-weight--medium tb-color--grey-500 tb-padding--8-36-i tb-cursor--pointer"
+                ngClass.xs="tb-padding--h-16-i">
+                About Me
+            </a>
+            <a matRipple href="#projects-section"
+                class="tb-a--unset tb-flex--justify-center tb-typo--h5 tb-font-weight--medium tb-color--grey-500 tb-padding--8-36-i tb-cursor--pointer"
+                ngClass.xs="tb-padding--h-16-i">
+                Projects
+            </a>
+            <a matRipple href="#expertise-section"
+                class="tb-a--unset tb-flex--justify-center tb-typo--h5 tb-font-weight--medium tb-color--grey-500 tb-padding--8-36-i tb-cursor--pointer"
+                ngClass.xs="tb-padding--h-16-i">
+                Expertise
+            </a>
+        </mat-toolbar-row>
+    </mat-toolbar>
+
+    <!-- conatiner div -->
+    <mat-sidenav-container class="tb-height--full">
+        <mat-sidenav-content fxLayout="column">
+            <div class="tb-height--full" fxLayout="column">
+                <!--  tb-color-bg--white -->
+                <div fxFlex cdkScrollable class="tb-height--full tb-overflow--auto" id="dashboard-container"
+                    #contentScroller>
+                    <router-outlet #outlet></router-outlet>
+                </div>
+            </div>
+        </mat-sidenav-content>
+
+    </mat-sidenav-container>
+</div>

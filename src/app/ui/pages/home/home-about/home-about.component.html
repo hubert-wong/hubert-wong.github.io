@@ -1,0 +1,94 @@
+<div class="tb-position--relative main" ngClass.xs="xs" ngClass.sm="sm" #animRefView>
+    <div class="tb-container tb-position--relative container" id="about-section">
+        <div fxLayout="column" fxLayoutAlign="start stretch">
+
+            <div [@transitionText]="{value:_mTriggerAnim, params:{animDelay:100}}" fxLayout="row"
+                fxLayoutAlign="start end">
+                <h4 class="title current-typo--h4 tb-flex--shrink-0" >About Me.</h4>
+                <div class="tb-width--12"></div>
+                <div fxFlex="60" class="line tb-color-bg--black"></div>
+                <div fxFlex class=""></div>
+            </div>
+
+            <div ngClass.gt-xs="tb-height--20" ngClass.xs="tb-height--12"></div>
+
+
+            <div fxLayout="row" fxLayout.xs="column">
+                <div [fxFlexOrder]='1' [fxFlexOrder.xs]="2" fxFlex fxFlex.xs="none" fxFlex.sm="70" fxLayout="column">
+                    <div ngClass.gt-xs="tb-height--64" ngClass.xs="tb-height--20"></div>
+
+                    <p [@transitionText]="{value:_mTriggerAnim, params:{animDelay:200}}"
+                        class="current-typo--body1-medium tb-color--black-54">
+                        I've always liked to create stuff that start off as solving personal problems I have that evolve into things that others can also use.
+                        I graduated from the <span class="tb-color--black">University of Michigan</span> in 2019 with a 
+                        Bachelor's Degree of Science and Engineering in Computer Science.
+                        <div ngClass.gt-sm="tb-height--12" ngClass.sm="tb-height--8" ngClass.xs="tb-height--6"></div>
+
+                    <p [@transitionText]="{value:_mTriggerAnim, params:{animDelay:200}}"
+                        class="current-typo--body1-medium tb-color--black-54">I want to be able to create uniquely useful things that not only I would be proud of, but
+                        also people would love to use.</p>
+
+                    <div ngClass.gt-sm="tb-height--56" ngClass.sm="tb-height--46" ngClass.xs="tb-height--32"></div>
+
+                    <!-- <div [@transitionText]="{value:_mTriggerAnim, params:{animDelay:400}}" fxLayout="row wrap"
+                        fxLayoutGap="6">
+                        <div class="skill" style="background-color: #99e98f;">
+                            <h5 class="current-typo--h5">JavaScript/TypeScript</h5>
+                        </div>
+
+                        <div class="skill" style="background-color: #f0732b;">
+                            <h5 class="current-typo--h5 tb-color--black">HTML/CSS</h5>
+                        </div>
+
+                        <div class="skill" style="background-color: #F57FFF;">
+                            <h5 class="current-typo--h5 tb-color--black">NodeJs</h5>
+                        </div>
+
+                        <div class="skill" style="background-color: #6F73C3;">
+                            <h5 class="current-typo--h5 tb-color--white">AngularJs</h5>
+                        </div>
+                    </div>
+                    <div class="tb-height--8"></div>
+
+                    <div [@transitionText]="{value:_mTriggerAnim, params:{animDelay:500}}" fxLayout="row wrap"
+                        fxLayoutGap="6">
+                        <div class="skill" style="background-color: #FFD647;">
+                            <h5 class="current-typo--h5">Java</h5>
+                        </div>
+
+                        <div class="skill" style="background-color: #F44040;">
+                            <h5 class="current-typo--h5 tb-color--white">C/C++</h5>
+                        </div>
+
+                        <div class="skill" style="background-color: #68F17E;">
+                            <h5 class="current-typo--h5 tb-color--black">CassandraQL</h5>
+                        </div>
+
+                        <div class="skill" style="background-color: #027DFD;">
+                            <h5 class="current-typo--h5 tb-color--white">MySQL</h5>
+                        </div>
+                    </div> -->
+
+                    <div [@transitionText]="{value:_mTriggerAnim, params:{animDelay:600}}" fxLayout="row"
+                        fxLayoutAlign="start center" fxLayoutGap="32">
+                        <a class="btn-area-cv" href="/src/assets/Hubert_Wong.pdf" target="_blank">
+                            <button mat-raised-button color="primary"><span class="current-typo--button-medium">View/Download Resume</span></button>
+                        </a>
+                    </div>
+
+                </div>
+                <div fxFlex.xs="none" fxFlex [fxFlexOrder.xs]="1" [fxFlexOrder]=' 2' class="image-container"
+                    fxLayout="column" fxLayoutAlign="center stretch">
+                    <div [@transitionImageScale]="{value:_mTriggerAnim, params: {animDelay: 800}}"
+                        class="tb-text--align-center image-area" #imageAreaView>
+                        <img class="image tb-position--relative" src="assets/img/avatar/pic_avatar.png" />
+                    </div>
+                </div>
+
+            </div>
+
+
+
+        </div>
+    </div>
+</div>

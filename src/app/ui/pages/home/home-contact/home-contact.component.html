@@ -1,0 +1,22 @@
+<div class="tb-position--relative main current" ngClass.xs="xs" ngClass.sm="sm" #animRefView>
+
+    <div class="tb-container tb-position--relative container">
+        <div fxLayout="column" fxLayoutAlign="start stretch">
+
+            <h2 [@transitionText]="{value:_mTriggerAnim, params:{animDelay:100}}" ngClass.gt-sm="current-typo--h3-light"
+                ngClass.sm="current-typo--h3-light" ngClass.xs="current-typo--h4">Get In Touch.</h2>
+
+            <div ngClass.gt-xs="tb-height--36" ngClass.xs="tb-height--20"></div>
+
+            <p [@transitionText]="{value:_mTriggerAnim,  params: {animDelay: 500}}"
+                class="connect-detail tb-color--black-38" ngClass.gt-sm="current-typo--body1"
+                ngClass.sm="current-typo--body1" ngClass.xs="current-typo--body1">
+                Feel free to reach out if you have a question or just want to connect.</p>
+            <div ngClass.gt-xs="tb-height--24" ngClass.xs="tb-height--16"></div>
+
+            <!-- <h4 class="tb-color--black" ngClass.gt-xs="current-typo--h4" ngClass.xs="current-typo--h5">Or</h4> -->
+            <div  [@transitionText]="{value:_mTriggerAnim,  params: {animDelay: 600}}" class="underline"><a class="tb-color--black" ngClass.gt-xs="current-typo--h4 " ngClass.xs="current-typo--h5"
+                    href="mailto:hubert.wong2401@gmail.com">hubert.wong2401@gmail.com</a></div>
+        </div>
+    </div>
+</div>
