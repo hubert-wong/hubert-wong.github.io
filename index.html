@@ -1,0 +1,956 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hubert Wong - Software Engineer</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: #333;
+            overflow-x: hidden;
+        }
+
+        .particle {
+            position: fixed;
+            width: 4px;
+            height: 4px;
+            background: rgba(255, 255, 255, 0.5);
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        header {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 2rem;
+            text-align: center;
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+            position: relative;
+            z-index: 10;
+            transform: translateY(-100%);
+            animation: slideDown 0.8s forwards;
+        }
+
+        @keyframes slideDown {
+            to { transform: translateY(0); }
+        }
+
+        h1 {
+            font-size: 3rem;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 0.5rem;
+            cursor: pointer;
+            transition: transform 0.3s;
+            position: relative;
+        }
+
+        h1:hover {
+            transform: scale(1.05);
+        }
+
+        h1::after {
+            content: '{ Full Stack }';
+            position: absolute;
+            top: -20px;
+            right: -140px;
+            font-size: 0.4em;
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: float 3s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        .subtitle {
+            font-size: 1.2rem;
+            color: #555;
+            margin-bottom: 1rem;
+        }
+
+        .subtitle::before {
+            content: '< ';
+            color: #667eea;
+        }
+
+        .subtitle::after {
+            content: ' />';
+            color: #667eea;
+        }
+
+        .contact-info {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            flex-wrap: wrap;
+            margin-top: 1rem;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: transform 0.3s;
+        }
+
+        .contact-item:hover {
+            transform: translateY(-3px);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 2rem auto;
+            padding: 0 1rem;
+            position: relative;
+            z-index: 10;
+        }
+
+        .section {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+            opacity: 0;
+            transform: translateY(30px);
+            animation: fadeInUp 0.6s forwards;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: linear-gradient(90deg, #667eea, #764ba2, #f093fb);
+        }
+
+        .section:nth-child(1) { animation-delay: 0.1s; }
+        .section:nth-child(2) { animation-delay: 0.2s; }
+        .section:nth-child(3) { animation-delay: 0.3s; }
+        .section:nth-child(4) { animation-delay: 0.4s; }
+        .section:nth-child(5) { animation-delay: 0.5s; }
+
+        @keyframes fadeInUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        h2 {
+            color: #667eea;
+            margin-bottom: 1.5rem;
+            font-size: 2rem;
+            position: relative;
+            padding-bottom: 0.5rem;
+        }
+
+        h2::before {
+            content: '// ';
+            color: #999;
+            font-weight: normal;
+        }
+
+        h2::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 60px;
+            height: 3px;
+            background: linear-gradient(90deg, #667eea, #764ba2);
+            border-radius: 2px;
+        }
+
+        .job {
+            margin-bottom: 2rem;
+            padding: 1.5rem;
+            background: linear-gradient(135deg, rgba(102, 126, 234, 0.1) 0%, rgba(118, 75, 162, 0.1) 100%);
+            border-radius: 15px;
+            border-left: 4px solid #667eea;
+            transition: all 0.3s;
+            cursor: pointer;
+            position: relative;
+        }
+
+        .job::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 0;
+            height: 100%;
+            background: linear-gradient(90deg, rgba(102, 126, 234, 0.1), transparent);
+            transition: width 0.3s;
+            border-radius: 15px;
+        }
+
+        .job:hover::before {
+            width: 100%;
+        }
+
+        .job:hover {
+            transform: translateX(10px);
+            box-shadow: 0 5px 20px rgba(102, 126, 234, 0.3);
+        }
+
+        .job-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+
+        .job-title {
+            font-size: 1.3rem;
+            font-weight: bold;
+            color: #333;
+        }
+
+        .job-date {
+            color: #764ba2;
+            font-weight: 600;
+        }
+
+        .job-company {
+            font-size: 1.1rem;
+            color: #555;
+            margin-bottom: 1rem;
+        }
+
+        ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        li {
+            padding: 0.5rem 0;
+            padding-left: 1.5rem;
+            position: relative;
+        }
+
+        li::before {
+            content: '▹';
+            position: absolute;
+            left: 0;
+            color: #667eea;
+            font-weight: bold;
+        }
+
+        .education-pride {
+            background: linear-gradient(135deg, #00274C 0%, #FFCB05 100%);
+            color: white;
+            padding: 2rem;
+            border-radius: 15px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .education-pride::before {
+            content: 'GO BLUE! 〽️';
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            font-size: 1.5rem;
+            font-weight: bold;
+            opacity: 0.3;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 0.3; transform: scale(1); }
+            50% { opacity: 0.6; transform: scale(1.05); }
+        }
+
+        .education-pride .job-title {
+            color: #FFCB05;
+            font-size: 1.8rem;
+        }
+
+        .education-pride .job-company,
+        .education-pride li {
+            color: white;
+        }
+
+        .education-pride li::before {
+            color: #FFCB05;
+        }
+
+        .wolverine-badge {
+            display: inline-block;
+            background: #FFCB05;
+            color: #00274C;
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
+            font-weight: bold;
+            margin-top: 0.5rem;
+            box-shadow: 0 2px 10px rgba(255, 203, 5, 0.5);
+        }
+
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+        }
+
+        .skill-category {
+            background: linear-gradient(135deg, rgba(102, 126, 234, 0.1) 0%, rgba(118, 75, 162, 0.1) 100%);
+            padding: 1.5rem;
+            border-radius: 15px;
+            transition: transform 0.3s;
+        }
+
+        .skill-category:hover {
+            transform: translateY(-5px) rotate(1deg);
+        }
+
+        .skill-category h3 {
+            color: #667eea;
+            margin-bottom: 0.5rem;
+        }
+
+        .skill-tag {
+            display: inline-block;
+            background: white;
+            padding: 0.4rem 0.8rem;
+            margin: 0.3rem;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s;
+            cursor: pointer;
+        }
+
+        .skill-tag:hover {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            transform: scale(1.1) rotate(-5deg);
+        }
+
+        .easter-egg-container {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            z-index: 1000;
+        }
+
+        .easter-egg {
+            width: 70px;
+            height: 70px;
+            background: linear-gradient(135deg, #ff6b6b 0%, #ee5a6f 50%, #c44569 100%);
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2.5rem;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+            transition: all 0.3s;
+            animation: bounce 2s infinite;
+            position: relative;
+        }
+
+        .easter-egg::after {
+            content: 'Click me!';
+            position: absolute;
+            bottom: -30px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 0.7rem;
+            background: rgba(0, 0, 0, 0.8);
+            color: white;
+            padding: 0.3rem 0.6rem;
+            border-radius: 10px;
+            white-space: nowrap;
+            opacity: 0;
+            animation: tooltipFade 3s infinite;
+        }
+
+        @keyframes tooltipFade {
+            0%, 90%, 100% { opacity: 0; }
+            45%, 55% { opacity: 1; }
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            50% { transform: translateY(-15px) rotate(10deg); }
+        }
+
+        .easter-egg:hover {
+            transform: scale(1.2) rotate(180deg);
+            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.9);
+            z-index: 2000;
+            justify-content: center;
+            align-items: center;
+            padding: 1rem;
+        }
+
+        .modal-content {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 3rem;
+            border-radius: 20px;
+            text-align: center;
+            max-width: 600px;
+            width: 100%;
+            animation: scaleIn 0.5s;
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .modal-content::before {
+            content: '🎮';
+            position: absolute;
+            top: -20px;
+            left: -20px;
+            font-size: 5rem;
+            opacity: 0.1;
+            animation: rotate 10s linear infinite;
+        }
+
+        .modal-content::after {
+            content: '🍳';
+            position: absolute;
+            bottom: -20px;
+            right: -20px;
+            font-size: 5rem;
+            opacity: 0.1;
+            animation: rotate 10s linear infinite reverse;
+        }
+
+        @keyframes rotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        @keyframes scaleIn {
+            from {
+                transform: scale(0) rotate(-180deg);
+            }
+            to {
+                transform: scale(1) rotate(0deg);
+            }
+        }
+
+        .modal-content h2 {
+            color: white;
+            margin-bottom: 1rem;
+            font-size: 2.5rem;
+        }
+
+        .modal-content h2::before {
+            content: '';
+        }
+
+        .modal-content h2::after {
+            display: none;
+        }
+
+        .hobby-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+
+        .hobby-card {
+            background: rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(10px);
+            padding: 2rem;
+            border-radius: 15px;
+            transition: all 0.3s;
+            cursor: pointer;
+        }
+
+        .hobby-card:hover {
+            transform: translateY(-10px) rotate(2deg);
+            background: rgba(255, 255, 255, 0.3);
+        }
+
+        .hobby-icon {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+            display: block;
+        }
+
+        .hobby-title {
+            font-size: 1.5rem;
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+        }
+
+        .close-modal {
+            background: white;
+            color: #667eea;
+            border: none;
+            padding: 1rem 2rem;
+            border-radius: 10px;
+            cursor: pointer;
+            margin-top: 1rem;
+            font-size: 1rem;
+            font-weight: bold;
+            transition: all 0.3s;
+        }
+
+        .close-modal:hover {
+            transform: scale(1.1);
+            box-shadow: 0 5px 20px rgba(255, 255, 255, 0.3);
+        }
+
+        .code-decoration {
+            font-family: 'Courier New', monospace;
+            color: #999;
+            font-size: 0.9rem;
+            margin: 1rem 0;
+        }
+
+        @media (max-width: 768px) {
+            h1 { 
+                font-size: 2rem; 
+            }
+            
+            h1::after {
+                position: static;
+                display: block;
+                margin-top: 0.5rem;
+            }
+            
+            .contact-info { 
+                flex-direction: column; 
+                gap: 0.5rem; 
+            }
+            
+            .job-header { 
+                flex-direction: column; 
+                align-items: flex-start; 
+            }
+            
+            .container {
+                padding: 0 1rem;
+            }
+            
+            .section {
+                padding: 1.5rem;
+            }
+            
+            h2 {
+                font-size: 1.5rem;
+            }
+            
+            .skills-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .hobby-cards {
+                grid-template-columns: 1fr;
+            }
+            
+            .modal-content {
+                padding: 2rem 1.5rem;
+            }
+            
+            .modal-content h2 {
+                font-size: 1.8rem;
+            }
+            
+            .easter-egg {
+                width: 60px;
+                height: 60px;
+                font-size: 2rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            h1 {
+                font-size: 1.5rem;
+            }
+            
+            .subtitle {
+                font-size: 1rem;
+            }
+            
+            .section {
+                padding: 1rem;
+            }
+            
+            .job {
+                padding: 1rem;
+            }
+            
+            .job-title {
+                font-size: 1.1rem;
+            }
+            
+            .easter-egg-container {
+                bottom: 15px;
+                right: 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1 onclick="titleClick()">Hubert Wong</h1>
+        <p class="subtitle">Senior Software Engineer</p>
+        <div class="contact-info">
+            <div class="contact-item">
+                <span>📧</span>
+                <a href="mailto:hubert.wong2401@gmail.com" style="text-decoration: none; color: #667eea;">hubert.wong2401@gmail.com</a>
+            </div>
+            <div class="contact-item">
+                <span>📱</span>
+                <span>(626) 246-2775</span>
+            </div>
+            <div class="contact-item">
+                <span>📍</span>
+                <span>Foster City, CA</span>
+            </div>
+            <div class="contact-item">
+                <span>💼</span>
+                <a href="https://www.linkedin.com/in/hubert-wong1124" target="_blank" style="text-decoration: none; color: #667eea;">LinkedIn</a>
+            </div>
+        </div>
+    </header>
+
+    <div class="container">
+        <div class="section">
+            <h2>Experience</h2>
+            <div class="code-decoration">const experience = [</div>
+            
+            <div class="job" onclick="jobClick(this)">
+                <div class="job-header">
+                    <div class="job-title">Senior Software Engineer</div>
+                    <div class="job-date">Jun 2025 - Present</div>
+                </div>
+                <div class="job-company">Visa | Foster City, CA</div>
+                <ul>
+                    <li>Working as a Full Stack Engineer, primarily focusing on creating/maintaining internal monitoring applications and features</li>
+                    <li>Lead projects from design to production installation, working alongside product stakeholders regularly</li>
+                    <li>Technologies: Java, TypeScript, C++, AngularJS, NodeJS, React, MySQL, HTML, Python, CassandraQL</li>
+                </ul>
+            </div>
+
+            <div class="job" onclick="jobClick(this)">
+                <div class="job-header">
+                    <div class="job-title">Software Engineer</div>
+                    <div class="job-date">Jan 2023 - Jun 2025</div>
+                </div>
+                <div class="job-company">Visa | Foster City, CA</div>
+                
+                <div style="margin-top: 1rem; font-weight: bold; color: #667eea;">Internal Application Manager (IAM)</div>
+                <ul>
+                    <li>Established an improvement in user experience and brought 50% more users in the past year onto this application to use in business performance metrics tracking</li>
+                    <li>Improved application performance by lowering server CPU usage by 20% while accommodating user onboarding daily</li>
+                    <li>Established new API calls and file transfer protocols between existing applications onto the monitoring application to centralize performance metrics</li>
+                    <li>Created new data connections using data batch processing to handle new downstream flows of system performance data</li>
+                </ul>
+
+                <div style="margin-top: 1rem; font-weight: bold; color: #667eea;">Email Alerting System</div>
+                <ul>
+                    <li>Created a company-wide configurable alerting system that runs parallel to services across 4 data centers worldwide with 8 different servers each</li>
+                    <li>Developed alerts that track and monitor system performance, send email alerts to configured owners, and trigger repair scripts when thresholds are exceeded</li>
+                    <li>Reduced incorrect performance metrics by 75% using instant alerts and automated scripts</li>
+                </ul>
+
+                <div style="margin-top: 1rem; font-weight: bold; color: #667eea;">Transaction Metrics Display</div>
+                <ul>
+                    <li>Created a new feature on the IAM to parse hundreds of millions of transaction data daily to analyze and generate readable analytics</li>
+                    <li>Built a new connection from 32 different MySQL databases worldwide to aggregate transaction data to a single CassandraQL database</li>
+                </ul>
+            </div>
+
+            <div class="job" onclick="jobClick(this)">
+                <div class="job-header">
+                    <div class="job-title">Software Engineer Intern</div>
+                    <div class="job-date">Jan 2021 - Dec 2021</div>
+                </div>
+                <div class="job-company">Isuzu Technical Center of America | Ann Arbor, MI</div>
+                <ul>
+                    <li>Created a vehicle testing and data visualization GUI utilizing AWS S3 data buckets to house and communicate vehicle testing data</li>
+                    <li>Developed data transfer connections utilizing AWS IoT Core data connections between 8 autonomous vehicles to reduce delay between remote controls</li>
+                    <li>Technologies: Python, PyQt5</li>
+                </ul>
+            </div>
+            
+            <div class="code-decoration">];</div>
+        </div>
+
+        <div class="section">
+            <h2>Education</h2>
+            <div class="education-pride">
+                <div class="job-header">
+                    <div class="job-title">University of Michigan 〽️</div>
+                    <div class="job-date" style="color: #FFCB05;">Dec 2022</div>
+                </div>
+                <div class="job-company">BSE Computer Science | Ann Arbor, MI</div>
+                <ul>
+                    <li>GPA: 3.34</li>
+                    <li>Relevant Coursework: Data Structures, Discrete Math, Algorithms, Web Systems, Databases, Machine Learning, Web Security, and Frameworks</li>
+                </ul>
+                <div class="wolverine-badge">🏈 Go Wolverines! 🏆</div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>Projects</h2>
+            <div class="code-decoration">function buildCoolStuff() {</div>
+            <div class="job">
+                <div class="job-title">Video Game Database</div>
+                <ul style="margin-top: 1rem;">
+                    <li>Created a personal database that would house different video games in my collection</li>
+                    <li>The database backend sorts input by detecting keywords to describe game genre by implementing the kNN algorithm model based on fed training data</li>
+                    <li>Technologies: JavaScript, Python, Java, Node.js, MySQL</li>
+                </ul>
+            </div>
+            <div class="code-decoration">}</div>
+        </div>
+
+        <div class="section">
+            <h2>Skills</h2>
+            <div class="skills-grid">
+                <div class="skill-category">
+                    <h3>Languages</h3>
+                    <div>
+                        <span class="skill-tag">Python</span>
+                        <span class="skill-tag">C/C++</span>
+                        <span class="skill-tag">Java</span>
+                        <span class="skill-tag">HTML</span>
+                        <span class="skill-tag">CSS</span>
+                        <span class="skill-tag">JavaScript</span>
+                        <span class="skill-tag">TypeScript</span>
+                    </div>
+                </div>
+                <div class="skill-category">
+                    <h3>Frameworks</h3>
+                    <div>
+                        <span class="skill-tag">AngularJS</span>
+                        <span class="skill-tag">NodeJS</span>
+                        <span class="skill-tag">React</span>
+                        <span class="skill-tag">PyQt5</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="easter-egg-container">
+        <div class="easter-egg" onclick="showEasterEgg()">🎲</div>
+    </div>
+
+    <div class="modal" id="modal">
+        <div class="modal-content">
+            <h2>Level Up! 🎉</h2>
+            <p style="font-size: 1.2rem; margin-bottom: 1rem;">You discovered my secret hobbies!</p>
+            
+            <div class="hobby-cards">
+                <div class="hobby-card" onclick="hobbyClick(this)">
+                    <span class="hobby-icon">🎮</span>
+                    <div class="hobby-title">Gaming</div>
+                    <p>From building game databases to endless playthroughs - gaming is life!</p>
+                </div>
+                <div class="hobby-card" onclick="hobbyClick(this)">
+                    <span class="hobby-icon">🍳</span>
+                    <div class="hobby-title">Cooking</div>
+                    <p>Debugging code by day, perfecting recipes by night. Both need the right ingredients!</p>
+                </div>
+            </div>
+            
+            <p style="margin-top: 1.5rem; font-size: 0.9rem; opacity: 0.9;">
+                Fun fact: I apply the same problem-solving skills from coding to both cooking and gaming strategy!
+            </p>
+            
+            <button class="close-modal" onclick="closeModal()">Achievement Unlocked! ✨</button>
+        </div>
+    </div>
+
+    <script>
+        // Particle animation
+        function createParticle() {
+            const particle = document.createElement('div');
+            particle.className = 'particle';
+            particle.style.left = Math.random() * window.innerWidth + 'px';
+            particle.style.top = Math.random() * window.innerHeight + 'px';
+            document.body.appendChild(particle);
+
+            const duration = 3000 + Math.random() * 2000;
+            const tx = (Math.random() - 0.5) * 200;
+            const ty = (Math.random() - 0.5) * 200;
+
+            particle.animate([
+                { transform: 'translate(0, 0)', opacity: 1 },
+                { transform: `translate(${tx}px, ${ty}px)`, opacity: 0 }
+            ], {
+                duration: duration,
+                easing: 'ease-out'
+            });
+
+            setTimeout(() => particle.remove(), duration);
+        }
+
+        setInterval(createParticle, 200);
+
+        // Title click animation with code-like effect
+        function titleClick() {
+            const title = document.querySelector('h1');
+            const originalText = title.textContent;
+            const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ<>/{}[]';
+            let iterations = 0;
+            
+            const interval = setInterval(() => {
+                title.textContent = originalText
+                    .split('')
+                    .map((char, index) => {
+                        if (index < iterations) {
+                            return originalText[index];
+                        }
+                        return chars[Math.floor(Math.random() * chars.length)];
+                    })
+                    .join('');
+                
+                iterations += 1/3;
+                
+                if (iterations >= originalText.length) {
+                    clearInterval(interval);
+                    title.textContent = originalText;
+                }
+            }, 30);
+        }
+
+        // Job click animation with ripple effect
+        function jobClick(element) {
+            const ripple = document.createElement('div');
+            ripple.style.position = 'absolute';
+            ripple.style.width = '20px';
+            ripple.style.height = '20px';
+            ripple.style.background = 'rgba(102, 126, 234, 0.5)';
+            ripple.style.borderRadius = '50%';
+            ripple.style.top = '50%';
+            ripple.style.left = '50%';
+            ripple.style.transform = 'translate(-50%, -50%)';
+            ripple.style.pointerEvents = 'none';
+            
+            element.style.position = 'relative';
+            element.appendChild(ripple);
+            
+            ripple.animate([
+                { transform: 'translate(-50%, -50%) scale(0)', opacity: 1 },
+                { transform: 'translate(-50%, -50%) scale(20)', opacity: 0 }
+            ], {
+                duration: 600,
+                easing: 'ease-out'
+            });
+            
+            setTimeout(() => ripple.remove(), 600);
+        }
+
+        // Hobby card click animation
+        function hobbyClick(element) {
+            element.style.transform = 'scale(1.05) rotate(5deg)';
+            setTimeout(() => {
+                element.style.transform = '';
+            }, 300);
+        }
+
+        // Easter egg modal with gaming theme
+        function showEasterEgg() {
+            document.getElementById('modal').style.display = 'flex';
+            
+            // Gaming-style confetti with different icons
+            const icons = ['🎮', '🍳', '🎲', '🍕', '🏆', '⭐', '💫'];
+            for (let i = 0; i < 40; i++) {
+                setTimeout(() => {
+                    const confetti = document.createElement('div');
+                    confetti.style.position = 'fixed';
+                    confetti.style.left = Math.random() * window.innerWidth + 'px';
+                    confetti.style.top = '-10px';
+                    confetti.style.fontSize = '2rem';
+                    confetti.textContent = icons[Math.floor(Math.random() * icons.length)];
+                    confetti.style.zIndex = '3000';
+                    confetti.style.pointerEvents = 'none';
+                    document.body.appendChild(confetti);
+
+                    confetti.animate([
+                        { transform: 'translateY(0) rotate(0deg)', opacity: 1 },
+                        { transform: `translateY(${window.innerHeight}px) rotate(${Math.random() * 720}deg)`, opacity: 0 }
+                    ], {
+                        duration: 2000 + Math.random() * 1000,
+                        easing: 'cubic-bezier(0.25, 0.46, 0.45, 0.94)'
+                    });
+
+                    setTimeout(() => confetti.remove(), 3000);
+                }, i * 50);
+            }
+        }
+
+        function closeModal() {
+            document.getElementById('modal').style.display = 'none';
+        }
+
+        // Mouse trail effect with code symbols
+        const trailSymbols = ['<', '>', '{', '}', '/', '*'];
+        document.addEventListener('mousemove', (e) => {
+            if (Math.random() > 0.95) {
+                const trail = document.createElement('div');
+                trail.style.position = 'fixed';
+                trail.style.left = e.clientX + 'px';
+                trail.style.top = e.clientY + 'px';
+                trail.style.fontSize = '1rem';
+                trail.textContent = trailSymbols[Math.floor(Math.random() * trailSymbols.length)];
+                trail.style.color = 'rgba(102, 126, 234, 0.5)';
+                trail.style.pointerEvents = 'none';
+                trail.style.zIndex = '1';
+                trail.style.fontFamily = 'monospace';
+                document.body.appendChild(trail);
+
+                trail.animate([
+                    { transform: 'scale(1) translateY(0)', opacity: 1 },
+                    { transform: 'scale(0) translateY(20px)', opacity: 0 }
+                ], {
+                    duration: 1000,
+                    easing: 'ease-out'
+                });
+
+                setTimeout(() => trail.remove(), 1000);
+            }
+        });
+
+        // Keyboard shortcuts
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') {
+                closeModal();
+            }
+        });
+    </script>
+</body>
+</html>
